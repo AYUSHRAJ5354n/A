@@ -26,7 +26,7 @@ if admin_ids_str:
         ADMIN_IDS = [int(admin_id.strip()) for admin_id in admin_ids_str.split(",") if admin_id.strip()]
     except Exception as e:
         logger.error(f"Error parsing ADMIN_IDS: {str(e)}")
-ADMIN_ONLY_MODE = os.getenv("ADMIN_ONLY_MODE", "true").lower() == "true"  # Whether only admins can use the bot
+ADMIN_ONLY_MODE = os.getenv("ADMIN_ONLY_MODE", "false").lower() == "true"  # Whether only admins can use the bot
 
 # Dailymotion API credentials
 DAILYMOTION_API_KEY = os.getenv("DAILYMOTION_API_KEY")
