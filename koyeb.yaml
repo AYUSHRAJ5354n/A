@@ -1,0 +1,45 @@
+name: dailymotion-uploader-bot
+service:
+  name: api
+  instance_types:
+    type: small
+  ports:
+    - port: 8080
+      protocol: http
+      public: true
+  env:
+    - name: PORT
+      value: 8080
+    - name: API_ID
+      secret: api_id
+    - name: API_HASH
+      secret: api_hash
+    - name: BOT_TOKEN
+      secret: bot_token
+    - name: DAILYMOTION_API_KEY
+      secret: dailymotion_api_key
+    - name: DAILYMOTION_API_SECRET
+      secret: dailymotion_api_secret
+    - name: DAILYMOTION_USERNAME
+      secret: dailymotion_username
+    - name: DAILYMOTION_PASSWORD
+      secret: dailymotion_password
+    - name: ADMIN_IDS
+      secret: admin_ids
+    - name: ADMIN_ONLY_MODE
+      value: "true"
+  build:
+    builder: docker
+    dockerfile: Dockerfile
+  routes:
+    - path: /
+      protocol: http
+  healthchecks:
+    readiness:
+      http:
+        path: /health
+        port: 8080
+    liveness:
+      http:
+        path: /livez
+        port: 8080

@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: gunicorn main:app --bind 0.0.0.0:${PORT:-8080} --workers 4 --threads 8
+    volumes:
+      - .:/app
+    ports:
+      - "${PORT:-8080}:${PORT:-8080}"
+    environment:
+      - PORT=${PORT:-8080}
+      - API_ID=${API_ID}
+      - API_HASH=${API_HASH}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DAILYMOTION_API_KEY=${DAILYMOTION_API_KEY}
+      - DAILYMOTION_API_SECRET=${DAILYMOTION_API_SECRET}
+      - DAILYMOTION_USERNAME=${DAILYMOTION_USERNAME}
+      - DAILYMOTION_PASSWORD=${DAILYMOTION_PASSWORD}
